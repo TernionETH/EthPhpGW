@@ -1,0 +1,91 @@
+{%macro modal_window_create(_evt,header,body,buttons)%}
+	{%set _ini={
+			'_evt':'default',
+			'header':'Just window',
+			'body':'Hello World!!!',
+			'buttons':{'close':{'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}}
+		}
+	%}
+
+	{%for k,v in _ini %}
+		{%if k=='_evt' and _evt is empty%}{%set _evt=v%}{%endif%}
+		{%if k=='header' and header is empty%}{%set header=v%}{%endif%}
+		{%if k=='body' and body is empty%}{%set body=v%}{%endif%}
+		{%if k=='buttons' and buttons is empty%}{%set buttons=v%}{%endif%}
+	{%endfor%}
+
+	{%set _scheme={
+		'success':{'_hbg':'green','_hfc':'white-text','_hfico':'mdi-navigation-check'},
+		'warning':{'_hbg':'orange','_hfc':'white-text','_hfico':'mdi-alert-warning'},
+		'alert':{'_hbg':'red','_hfc':'white-text','_hfico':'mdi-alert-error'},
+		'default':{'_hbg':'indigo','_hfc':'white-text','_hfico':'mdi-action-info-outline'}
+	}%}
+
+	{%if _scheme[_evt] is defined%}
+		{%set _color=_scheme[_evt]%}
+	{%else%}
+		{%set _color=_scheme['default']%}
+	{%endif%}
+
+
+	<div class="modal-header {{_color._hbg}}">
+		<div class="row z-depth-1 {{_color._hfc}}" style="padding:0.5em;margin:0;">
+			<div class="col s11 l11 flow-text"><i class="{{_color._hfico}}"></i> {{header}}</div>
+			<div class="col s1 l1"><a class="modal-close center"><i class="small {{_color._hfc}} mdi-action-highlight-remove"></i></a></div>
+		</div>
+		
+	</div>
+	<div class="divider"></div>
+	<div class="modal-content">{{body}}</div>
+	<div class="divider"></div>
+	<div class="modal-footer grey lighten-4">
+
+		<div class="right">
+			{%for _butt in buttons%}
+				{%set _bcall=''%}
+				{%set _class='btn-flat waves-effect'%}
+				
+				{%if _butt.call.func is not empty%}
+					{%set _args={}%}
+					{%if _butt.call.args is not empty%}{%set _args=_butt.call.args%}{%endif%}
+					{%set _args=_args|json_encode%}
+					
+					{%set _bcall=_bcall~'onclick=\'javascript:return _mmcall(this,"'~_butt.call.func~'",'~_args~');\''%}
+				{%else%}
+					{%set _class=_class~' modal-close'%}
+				{%endif%}
+
+				{%if _butt._bg is not empty%}{%set _class=_class~' '~_butt._bg%}{%endif%}
+				
+				{%if _butt._color is not defined%}
+					{%set _class=_class~' white-text'%}
+				{%else%}
+					{%set _class=_class~' '~_butt._color %}
+				{%endif%}
+				<a style="margin-left:0.25em" class="{{_class}}" {{_bcall|raw}}><i class="mdi-content-clear"></i> {{_butt.text}}</a>
+			{%endfor%}
+        </div>
+
+	</div>
+{%endmacro%}
+
+{%macro content_create_by_errcodes(_ec)%}
+	<ul class="collection">
+		{%for _c in _ec%}
+		  <li class="collection-item"">
+			<div>
+				<i class="mdi-action-info-outline red-text"></i>
+				{{_c|raw}}
+			</div>
+		  </li>
+		{%endfor%}
+	</ul>
+{%endmacro%}
+
+{%macro content_create_by_successcodes(_ec)%}
+	<ul class="collection">
+		{%for _c in _ec%}
+		  <li class="collection-item""><div><i class="mdi-navigation-check green-text"></i>{{_c|raw}}</div></li>
+		{%endfor%}
+	</ul>
+{%endmacro%}

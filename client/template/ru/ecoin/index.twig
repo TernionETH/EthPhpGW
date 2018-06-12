@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="M">
+    <meta name="keywords" content="">
+    <title></title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <!-- For Windows Phone -->
+	<link href="/share/css/materialize/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link href="/share/css/materialize/layouts/style-horizontal.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link href="/share/plugins/dropify/css/dropify.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+	<link href="/css/etherium/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+</head>
+
+<body id="layouts-horizontal">
+<style>
+#horizontal-nav {
+margin-top:2px;
+}
+
+nav.navbar-color {
+height: 2px;
+
+}
+nav,footer.page-footer {
+    color: #fff;
+    background-color: #102138;
+}
+footer {
+    padding-left: 0;
+}
+</style>
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>        
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START HEADER -->
+    <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color"></nav>
+                <!-- Usersdropdown -->
+                <ul id="Usersdropdown" class="dropdown-content dropdown-horizontal-list">
+                    <li><a href="user-profile-page.html"  class="grey-text">User Profile</a></li>
+                    <li><a href="user-login.html"  class="grey-text">Login</a></li>
+                    <li><a href="user-register.html" class="grey-text">Register</a></li>
+                    <li><a href="user-forgot-password.html" class="grey-text">Forgot Password</a></li>                    
+                    <li><a href="user-lock-screen.html" class="grey-text">Lock Screen</a></li>
+                    <li><a href="user-sesssion-timeout.html" class="grey-text">Session Timeout</a></li>
+                </ul>
+            <!-- HORIZONTL NAV END-->
+        </div>
+        <!-- end header nav-->
+    </header>
+    <!-- END HEADER -->
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START MAIN -->
+	<div class="wrapper">
+		<!-- START CONTENT -->
+		<section id="content">
+			<!--start container-->
+			<div class="container">
+			---------------------------
+	
+<div class="row">
+                            <div class="col s12 m12 l6">
+                                <ul class="collection">
+                                    <li class="collection-item avatar">
+										<h4>Create New Wallet</h4>
+                                    </li>
+                                    <li class="collection-item">
+										<div class="row">
+											<form class="col s12" data-_rp="#wallet" data-_rpckey="wallet_create">
+											  <input type="hidden" name="_tl" value="{{now|date('Ymdhis')}}">
+											  <div class="row">
+													<div class="input-field col s12">
+														<input id="_npassword" class="_mf" type="text" name="password">
+														<label for="_npassword" class="">Enter a password</label>
+													</div>
+											  </div>
+											  <p><a class="btn-submit btn waves-effect waves-light light-blue darken-4">Create New Wallet</a></p>
+											</form>
+										  </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col s12 m12 l6" id="buy_coins_section">
+                                <ul class="collection">
+                                    <li class="collection-item avatar">
+										<h4>By coins</h4>
+                                    </li>
+                                    <li class="collection-item">
+										<div class="row">
+											<p>Your wallet: <b id="wallet_to_by_coins_text"></b></p>
+											<form class="col s12" data-_rp="#wallet" data-_rpckey="wallet_buy_tokens">
+											  <input type="hidden" id="wallet_to_by_coins" name="wallet" value="0">
+											  
+											  <div class="row">
+													<div class="input-field col m6 s3 l3">
+														<input name="amount" type="radio" id="c50" value="50" checked>
+														<label for="c50">50</label>
+													</div>
+													<div class="input-field col m6 s3 l3">
+														<input name="amount" type="radio" id="c100" value="100">
+														<label for="c100">100</label>
+													</div>
+													<div class="input-field col m6 s3 l3">
+														<input name="amount" type="radio" id="c500" value="500">
+														<label for="c500">500</label>
+													</div>
+													<div class="input-field col m6 s3 l3">
+														<input name="amount" type="radio" id="c1000" value="1000">
+														<label for="c1000">1000</label>
+													</div>
+											  </div>
+											  <div class="row">	
+											  <br/><br/>
+													<div class="divider"></div>											  
+													<div class="input-field col s12">
+														<input id="_bpassword" class="_mf" type="text" name="password">
+														<label for="_bpassword" class="">Enter a password</label>
+													</div>
+											  </div>
+											  <p><a class="btn-submit btn waves-effect waves-light light-blue darken-4">BUY</a></p>
+											</form>
+										  </div>
+                                    </li>
+                                </ul>
+                            </div>							
+							
+                            <div class="col s12 m12 l6">
+                                <ul class="collection">
+                                    <li class="collection-item avatar">
+										<h4>Authentication </h4>
+                                    </li>
+                                    <li class="collection-item">
+										<div class="row">
+											<br/>
+											<div class="col s12 m6 l6">
+												<input type="checkbox" id="have_wallet_number" checked="cheked">
+												<label for="have_wallet_number">Enter wallet</label>
+											</div>
+											<div class="col s12 m6 l6">
+												<input type="checkbox" id="have_wallet_file">
+												<label for="have_wallet_file">Upload wallet keyfile</label>
+											</div>
+											<br/><br/>
+										</div>
+
+										<div class="row" id="wallet_number_upload">
+										<form id="uploadbanner" enctype="multipart/form-data" method="post" action="/rpc/">
+											<div class="col s12 m12 l12">
+												
+													<input type="file" id="wallet_upload_input" class="dropify" data-max-file-size="500M" data-show-remove="false"/>
+												
+											</div>
+										</form>
+											<div class="divider"></div>
+										</div>
+										
+										<div class="row">
+											<form class="col s12">
+											  
+												<div class="input-field col s12"  id="wallet_number_field">
+													<label for="wallet_number">Account number</label>
+													<!-- {#0xa5Dc1f02588456922a6D50979Eb750E52450c02b#} -->
+													<input type="text" id="wallet_number"  class="_mf" name="wallet"  value="0x0" />
+												</div>
+											  
+											  
+												<div class="input-field col s12">
+													<input id="confirm_password" type="text" class="_mf" name="password" value="">
+													<label for="confirm_password" class="">Password</label>
+												</div>
+												<div class="input-field col s12">
+													<p>Current balance: <b><i id='current_balance'>0</i> TDT</b></p> 
+												</div>
+												<div class="input-field col s12">
+													<a data-_rp="#wallet" data-_rpckey="wallet_authentication" class="btn-submit btn waves-effect waves-light light-blue darken-4">Авторизоваться</a>
+												</div>
+											</form>
+										</div>
+										
+										
+										
+										
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+			</div>
+		</section>
+
+
+	</div>
+    <!-- END MAIN -->
+
+    <!-- START FOOTER -->
+    <footer class="page-footer">
+        <div class="container">
+        </div>
+        <div class="footer-copyright">
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+	<script type="text/javascript" src="/share/js/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/share/js/materialize/materialize.js"></script>
+	<script type="text/javascript" src="/share/js/materialize/plugins.js"></script>
+	
+	<script type="text/javascript" src="/share/plugins/dropify/js/dropify.min.js"></script>
+	
+	<script type="text/javascript" src="/share/js/mcore/mcore-jquery-plugin_v2.js"></script>
+	<script type="text/javascript" src="/share/js/mcore/mcore-materialize-modal.js"></script>
+	<script type="text/javascript" src="/js/ecoin/etherium.js"></script>
+	{{jwrite()}}
+</body>
+
+</html>

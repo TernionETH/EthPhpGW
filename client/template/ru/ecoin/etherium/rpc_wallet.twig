@@ -1,0 +1,84 @@
+{%- import "/_macro/_macro_materialize_popup.twig" as _mp -%}
+
+{% set _data=c_St.get_rpc_env('_data') %}
+{% set _code=c_St.get_rpc_env('_code') %}
+{# set _err=c_St.get_rpc_env('_err') #}
+
+{%if _code=='cant_assign_wallet'%}
+        {%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+        {%set _evt='warning'%}
+        {%set header="Create account error"%}
+        {%set body=_self.cant_assign_wallet(_data)%}
+{%elseif _code=='password_len_to_low'%}
+        {%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+        {%set _evt='warning'%}
+        {%set header="Password length to low"%}
+        {%set body='Minimum password length '~_data.min_len~' characters'%}		
+		
+{%elseif _code=='error-fields'%}
+        {%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+        {%set _evt='warning'%}
+        {%set header="Empty fields"%}
+        {%set body=_mp.content_create_by_errcodes(_data)%}
+{%elseif _code=='wallet_authentication_success'%}		
+        {#set buttons={
+                'info':  {'text':'Wallet info','_ico':'mdi-action-autorenew','_bg':'grey lighten-1','call':{func:'move_to_wallet_info','args':{}}},
+                'buycoins': {'text':'Buy coins','_ico':'mdi-maps-layers','_bg':'light-blue','call':{func:'move_to_buy_coins','args':{}}},
+        }#}
+		
+		{%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+		
+        {%set _evt='success'%}
+        {%set header="Authentication success"%}
+        {%set body='Lorem ipsum и что-то там'%}		
+{%elseif _code=='wallet_successfully_create'%}
+        {#set buttons={
+                'new':  {'text':'Create new','_ico':'mdi-action-autorenew','_bg':'grey lighten-1','call':{func:'reload','args':{}}},
+                'list': {'text':'Move to list','_ico':'mdi-maps-layers','_bg':'light-blue','call':{func:'move_to_list','args':{}}},
+        }#}
+		
+		{%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+		
+        {%set _evt='success'%}
+        {%set header="Wallet success created"%}
+        {%set body=_self.account_success_created(_data)%}
+{%elseif _code=='transaction_successfully_send'%}
+		{%set buttons={
+                'close':        {'text':'Close','_ico':'mdi-content-clear','_bg':'grey lighten-1'}
+        }%}
+		
+        {%set _evt='success'%}
+        {%set header="Transaction success send"%}
+        {%set body=_self.transaction_success_send(_data)%}	
+{%endif%}
+{{_mp.modal_window_create(_evt,header,body,buttons)}}
+
+
+{%macro account_success_created(_data)%}
+	<p> Your wallet number is:<br/>
+		<b>{{_data.wallet}}</b>
+	</p>
+	<p>If the key for wallet is not downloaded automatically, then you can download it from the link below</p>
+	<a href="{{_data.uri}}" target="_blank">{{_data.name}}</a>
+{%endmacro%}
+
+{%macro transaction_success_send(_data)%}
+	<p> id transaction:<br/>
+		<b style="font-size: 12px;">{{_data.transaction}}</b>
+	</p>
+{%endmacro%}
+
+
+{%macro cant_assign_wallet()%}
+	<h4 class="header2">Cant create account</h4>
+{%endmacro%}
